@@ -23,12 +23,12 @@ async def response(
 
     result = {
         "datetime": str(datetime.now()),
-        "code": code,
+        "statusCode": code,
         "status": status,
-        "message": message if message != None else status,
+        "statusMessage": message if message != None else status,
     }
-    result |= {"page": page} if page != None else result
-    result |= {"data": jsonable_encoder(data)}
+    result.update({"page": page} if page != None else {})
+    result.update({"data": jsonable_encoder(data)})
 
     try:
         code = HTTPStatus(code)
